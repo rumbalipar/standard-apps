@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\CompanyProfile;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -20,7 +21,10 @@ class AuthCheck
         if(!session()->has('sesiuserid') && ($request->path() != '/')){
             return redirect()->route('index')->with('error','Mohon login dahulu');
         }
-        view()->share('loginuser',User::find(session()->get('sesiuserid')));
+        view()->share([
+            'loginuser' => User::find(session()->get('sesiuserid')),
+            'applicationcompany' => CompanyProfile::first()
+        ]);
         
         return $next($request)->header('Cache-Control','np-cache,no-store,max-age=0,must-revalidates')
                                 ->header('Pragma','no-cache')

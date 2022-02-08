@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyProfile;
 use App\Models\GroupModule;
 use App\Models\Module;
 use App\Models\User;
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Redirect;
 class MainController extends Controller
 {
     public function index(){
-        return view('main.login');
+        return view('main.login',[
+            'data' => CompanyProfile::first()
+        ]);
     }
 
     public function login(Request $request){

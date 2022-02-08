@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\GroupModuleController;
 use App\Http\Controllers\GroupUserController;
 use App\Http\Controllers\MainController;
@@ -69,6 +70,11 @@ Route::group(['middleware' => ['authCheck']],function(){
         Route::post('/edit/{id}', [ModuleController::class, 'update'])->name('module.update');
         Route::get('/delete/{id}', [ModuleController::class, 'delete'])->name('module.delete');
         Route::post('/delete/{id}', [ModuleController::class, 'destroy'])->name('module.destroy');
+    });
+
+    Route::prefix('companyprofile')->group(function(){
+        Route::get('/', [CompanyProfileController::class, 'index'])->name('companyprofile.index');
+        Route::post('/', [CompanyProfileController::class, 'post'])->name('companyprofile.post');
     });
 });
 

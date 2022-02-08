@@ -111,10 +111,10 @@
     <div class="container-fluid">
         <div class="row main-content bg-success text-center">
             <div class="col-md-4 text-center company__info">
-                <span class="company__logo">
-                    <h2><span class="fa fa-android">
-                </span>
-                <h4 class="company_title">Cafe</h4>
+                @if (isset($data['logo']) && trim($data['logo']) != '' && file_exists("C:\\xampp\\htdocs\\project\\cafe\\public\\assets\\images\\".$data['logo']))
+                    <img src="{{ url('/') }}/assets/images/{{ $data['logo'] }}" class="img-fluid rounded" alt="Logo">                 
+                @endif
+                <h4 class="company_title">{{ isset($data['nama']) ? trim($data['nama']) : 'Cafe' }}</h4>
             </div>
             <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
                 <div class="container-fluid">
